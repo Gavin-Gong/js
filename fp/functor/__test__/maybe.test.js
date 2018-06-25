@@ -5,6 +5,6 @@ describe('maybe functor', () => {
     expect(Maybe.of('x').map(v => v.toUpperCase()).value).toBe("X")
   })
   test('fail', () => {
-    expect(Maybe.of().map(v => v.toUpperCase()).value).toBe(null)
+    expect(Maybe.of().map(v => v.toUpperCase()).map(v => v['data']).value).toBe(null)
   })
 })
