@@ -1,5 +1,5 @@
 // 添加静态属性
-export const decorator = target => {
+export const decorator = (target, name, descriptor) => {
   target.useDecorator = true;
 };
 
@@ -33,6 +33,11 @@ export const prop = (key, value) => {
 export const log = (text) => {
   return (target, name, descriptor) => {
     console.log(target, name, descriptor)
+    const oldFn = descriptor.value
+    descriptor.value = (...args) => {
+      console.log(text)
+      return oldFn(...args)
+    }
     return descriptor
   }
 }

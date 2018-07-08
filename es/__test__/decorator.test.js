@@ -57,6 +57,7 @@ describe("decorator", () => {
     }
 
     const test = new Test()
+    test.say()
     expect(test.say()).toBe("Hello")
   })
 })
