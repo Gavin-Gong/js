@@ -7,7 +7,8 @@
     "test": "jest",
     "test:fp": "jest fp",
     "test:rx": "jest rx",
-    "test:es": "jest es"
+    "test:es": "jest es",
+    "test:dsa": "jest DSA"
   },
   "author": "",
   "license": "ISC",
