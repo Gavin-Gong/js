@@ -1,35 +1,49 @@
 /**
- * 鉴于数组现有方法和浏览器 DOM 操作之间存在差异,
- * inesertBefore 会将现有节点移除并插入新的位置即为移动,
- * 但是数组方法中不存在对应 api
- * 所以单独封装移动数组元素的方法. 且该次操作算一次操作
+ * 鉴于数组现有方法和浏览器 DOM 操作之间存在差异, 且设计风格之间存在较大差异
+ * 比如数组方法 splice(index, count, item), 数组方法 api 倾向于使用 index
+ * 而 DOM 操作则偏向于使用 元素本身 inesertBefore(parentElment, childElement, refElement)
+ * 所以封装成了和 DOM 操作相对一致的 API
  */
 
 /**
- * @desc
- * @param {*} input 
- * @param {*} from 
- * @param {*} to 
- * @param {*} count 
+ * @desc 模拟 DOM 操作中的 insertBefore
+ * @param {[number]} input 
+ * @param {number} item 
+ * @param {number} refItem 
  */
-export function move(input, from, to, count = 1) {
-  const elm = input.splice(from, count)[0];
-  input.splice(to, 0, elm);
-  return input
-}
+export function inesertBefore(input, item, refItem) {
+  const itemIdx = input.indexOf(item)
+  if (itemIdx > -1) {
+    input.splice(itemIdx, 1); // 删除
+  }
 
-export function remove(input, from, count = 1) {
-  input.splice(from, count)
+  let refItemIdx = input.indexOf(refItem)
+  refItemIdx = (refItem == null || refItemIdx === -1) ? input.length : refItemIdx
+  input.splice(refItemIdx, 0, item); // 增加
+
   return input
 }
 
 /**
- * 
- * @param {[any]} input 
+ * @desc 模拟 DOM 操作中 removeChild
+ * @param {[number]} input 
  * @param {number} from 
- * @param {[any]} args 
  */
-export function add(input, from, args) {
-  input.splice(from, 0, ...args);
+export function removeChild(input, item) {
+  const idx = input.indexOf(item)
+  if (idx > -1) {
+    input.splice(idx, 1)
+  }
   return input
+}
+
+
+/**
+ * @desc 模拟 DOM 操作中的 sibling
+ * @param {[number]} input 
+ * @param {*} item 
+ */
+export function nextSibling(input, item) {
+  const idx = input.indexOf(item)
+  return idx === -1 ? null : input[idx + 1]
 }
