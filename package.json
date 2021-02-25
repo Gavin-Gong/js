@@ -24,5 +24,5 @@
   "dependencies": {
     "rxjs": "^6.2.2"
   },
-  "@type": "module"
+  "type": "module"
 }
