@@ -12,6 +12,7 @@
  * @param {number} refItem 
  */
 export function inesertBefore(input, item, refItem) {
+  if (item === refItem) return input
   const itemIdx = input.indexOf(item)
   if (itemIdx > -1) {
     input.splice(itemIdx, 1); // 删除
