@@ -7,58 +7,58 @@ import { inesertBefore, removeChild, nextSibling } from "./_util.js"
  * @param {[number]} newChildren 
  */
 export function diff(oldChildren, newChildren) {
-  const _oldChildren = oldChildren.map(v => v) // clone
+  const UIChildren = oldChildren.map(v => v) // 模拟 UI 元素
   let oldStartIdx = 0
   let newStartIdx = 0
 
-  let oldEndIdx = _oldChildren.length - 1
+  let oldEndIdx = oldChildren.length - 1
   let newEndIdx = newChildren.length - 1
 
-  let oldStartNode = _oldChildren[0]
+  let oldStartNode = oldChildren[0]
   let newStartNode = newChildren[0]
 
-  let oldEndNode = _oldChildren[oldEndIdx]
+  let oldEndNode = oldChildren[oldEndIdx]
   let newEndNode = newChildren[newEndIdx]
 
   while(oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
     // 空元素，减少 idx，跳出双指针循环
     if (!oldStartNode) {
-      oldStartNode = _oldChildren[++oldStartIdx]
+      oldStartNode = oldChildren[++oldStartIdx]
     } else if(!oldEndNode) {
-      oldEndNode = _oldChildren[--oldEndIdx]
+      oldEndNode = oldChildren[--oldEndIdx]
     } else if (!newStartNode) {
       newStartNode = newChildren[++newStartIdx]
     } else if (!newEndNode) {
       newEndNode = newChildren[--newEndIdx]
     } else  if (oldStartNode === newStartNode) {
-      oldStartNode = _oldChildren[++oldStartIdx]
+      oldStartNode = oldChildren[++oldStartIdx]
       newStartNode = newChildren[++newStartIdx]
     } else if (oldEndNode === newEndNode) {
-      oldEndNode = _oldChildren[--oldEndIdx]
+      oldEndNode = oldChildren[--oldEndIdx]
       newEndNode = newChildren[--newEndIdx]
     } else if (oldStartNode === newEndNode) {
-      inesertBefore(oldChildren, oldStartNode, nextSibling(oldChildren, oldEndNode))
+      inesertBefore(UIChildren, oldStartNode, nextSibling(UIChildren, oldEndNode))
       // 后移
-      oldStartNode = _oldChildren[++oldStartIdx]
+      oldStartNode = oldChildren[++oldStartIdx]
       newEndNode = newChildren[--newEndIdx]
     } else if (oldEndNode === newStartNode) {
       // 前移
-      inesertBefore(oldChildren, oldEndNode, oldStartNode)
+      inesertBefore(UIChildren, oldEndNode, oldStartNode)
       // 前移
-      oldEndNode = _oldChildren[--oldEndIdx]
+      oldEndNode = oldChildren[--oldEndIdx]
       newStartNode = newChildren[++newStartIdx]
     } else {
       // 其他情况
       // 拿新 children 中的第一个节点尝试去旧 children 中寻找
       const newEle = newChildren[newStartIdx]
-      const oldIdx = _oldChildren.indexOf(newEle)
+      const oldIdx = oldChildren.indexOf(newEle)
       if (oldIdx === -1) {
         // 找不到说明是新元素，执行 add
-        inesertBefore(oldChildren, newEle, oldStartNode)
+        inesertBefore(UIChildren, newEle, oldStartNode)
       } else {
         // 能找到执行 move
-        inesertBefore(oldChildren, _oldChildren[oldIdx], oldStartNode)
-        _oldChildren[oldIdx] = undefined
+        inesertBefore(UIChildren, oldChildren[oldIdx], oldStartNode)
+        oldChildren[oldIdx] = undefined
       }
       // 新 children 的第一个元素处理过了，向右移动
       newStartNode = newChildren[++newStartIdx]
@@ -69,14 +69,14 @@ export function diff(oldChildren, newChildren) {
       // 新增
       for (let i = newStartIdx; i <= newEndIdx; i++) {
         const before = newChildren[newEndIdx + 1] == null ? null : newChildren[newEndIdx + 1]
-        inesertBefore(oldChildren, newChildren[i], before)
+        inesertBefore(UIChildren, newChildren[i], before)
       }
     } else if (newEndIdx < newStartIdx) {
       // 移除
       for (let i = oldStartIdx; i <= oldEndIdx; i++) {
-        removeChild(oldChildren, _oldChildren[i])
+        removeChild(UIChildren, oldChildren[i])
       }
     }
   }
-  return oldChildren
+  return UIChildren
 }
