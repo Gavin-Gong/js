@@ -1,7 +1,7 @@
 import { diff } from "../vue-next"
 
 
-describe("vue diff", () => {
+describe("vue next diff", () => {
   test('resort item', () => {
     expect(diff([1, 2, 3], [3, 2, 1])).toEqual([3, 2, 1])
   })
@@ -19,7 +19,7 @@ describe("vue diff", () => {
   })
 
   test('multi condition', () => {
-    // expect(diff([1, 2, 3, 4, 5], [6, 3, 2, 1])).toEqual([6, 3, 2, 1])
+    expect(diff([1, 2, 3, 4, 5], [6, 3, 2, 1])).toEqual([6, 3, 2, 1])
     expect(diff([1, 2, 3, 5], [3, 2, 1, 6])).toEqual([3, 2, 1, 6])
   })
 })

@@ -28,7 +28,7 @@ export function inesertBefore(input, item, refItem) {
 /**
  * @desc 模拟 DOM 操作中 removeChild
  * @param {[number]} input 
- * @param {number} from 
+ * @param {number} item 
  */
 export function removeChild(input, item) {
   const idx = input.indexOf(item)

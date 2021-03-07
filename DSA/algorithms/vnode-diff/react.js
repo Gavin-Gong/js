@@ -2,12 +2,19 @@ import { inesertBefore, removeChild, nextSibling } from "./_util.js"
 
 /**
  * @desc React diff 算法
- * 进行双层循环, 一旦遇到相同的节点, 
+ * 核心思想：进行双层循环, 一旦遇到相同的节点, 
+ * 与上次记录的 oldChildren 中的最大 index 进行比较，
+ * 如果本次 index >  lastIndex 则说明顺序新旧一致，无需移动，只需记录本次 index 到 lastIndex
+ * 否则说明需要将本节点移动到上一个节点之后
+ * 由于始终使用后移的方式来调整顺序，
+ * 这种场景下 [1, 2, 3, ..., 100] -> [100, 1, 2, ..., 99]，需要将 1-99 向后移动，共计需要99次操作。
+ * 而不是将 100 插入到 1 前面，这样只需一次操作
+ * 操作指使用提供的 DOM API
  * @param {[number]} oldChildren 
  * @param {[number]} newChildren 
  */
 export function diff(oldChildren, newChildren) {
-  const UIChildren = oldChildren.map(v => v);
+  let UIChildren = oldChildren.map(v => v);
   let lastIndex = 0;
 
   if (newChildren.length === 0) {
@@ -25,22 +32,22 @@ export function diff(oldChildren, newChildren) {
       if (newNode === oldNode) {
         hasFind = true
         if (o < lastIndex) {
-          // 当前节点和后面节点顺序错位, 需要向前移动一位, 
-          const refNode = nextSibling(UIChildren, newChildren[n - 1]) // TODO:
+          // 当前节点和 n-1 节点顺序错位, 需要将当前节点插入到 n-1 后一位（的前面）, 
+          const refNode = nextSibling(UIChildren, newChildren[n - 1])
           inesertBefore(UIChildren, oldNode, refNode)
         } else {
           lastIndex = o
         }
-        // 一旦有节点相同, 中断本次循环, 防止 o 继续更新下去 & 浪费性能
+        // 一旦有节点相同, 中断内层循环, 防止继续更新下去浪费性能
         break
       }
     }
 
     // oldChildren 里面找不到 newChildren 的元素 说明要新增
-    // i 为 0 ,说明遍历的是第一个元素, 插入到 _oldChildren 的第一个节点即可
+    // i 为 0 ,说明遍历的是第一个元素, 插入到 UIChildren 的第一个节点即可
     // i >= 1, 直接插入到该元素前面
     if (!hasFind) {
-      const refNode = n - 1 < 0 ? oldChildren[0] : nextSibling(UIChildren, newChildren[n - 1])  // TODO:
+      const refNode = n - 1 < 0 ? oldChildren[0] : nextSibling(UIChildren, newChildren[n - 1])
       inesertBefore(UIChildren, newChildren[n], refNode)
     }
 
