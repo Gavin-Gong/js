@@ -6,18 +6,18 @@ export const decorator = (target, name, descriptor) => {
 // 自定义参数
 export const decoratorFn = (bool) => {
   return (target) => {
-    target.useDecorator = bool
-  }
-}
+    target.useDecorator = bool;
+  };
+};
 
 // 添加原型属性 和 值
 export const prop = (key, value) => {
   return (target) => {
     Object.assign(target.prototype, {
-      [key]: value
-    })
-  }
-}
+      [key]: value,
+    });
+  };
+};
 
 // 修饰类的属性
 /**
@@ -32,12 +32,12 @@ export const prop = (key, value) => {
  */
 export const log = (text) => {
   return (target, name, descriptor) => {
-    console.log(target, name, descriptor)
-    const oldFn = descriptor.value
+    console.log(target, name, descriptor);
+    const oldFn = descriptor.value;
     descriptor.value = (...args) => {
-      console.log(text)
-      return oldFn(...args)
-    }
-    return descriptor
-  }
-}
+      console.log(text);
+      return oldFn(...args);
+    };
+    return descriptor;
+  };
+};

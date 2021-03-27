@@ -16,7 +16,7 @@ export const compose = (...args) => {
  */
 export const compose1 = (...funcs) => {
   if (funcs.length === 0) {
-    return arg => arg;
+    return (arg) => arg;
   }
   if (funcs.length === 1) {
     return funcs[0];

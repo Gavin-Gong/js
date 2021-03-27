@@ -11,7 +11,7 @@
     "test:dsa": "jest DSA",
     "test:diff": "jest DSA/algorithms/vnode-diff",
     "test:lc": "jest DSA/algorithms/leetcode",
-    "fmt": "prettier **/*.js"
+    "fmt": "prettier **/*.js --write"
   },
   "author": "",
   "license": "ISC",
