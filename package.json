@@ -10,7 +10,8 @@
     "test:es": "jest es",
     "test:dsa": "jest DSA",
     "test:diff": "jest DSA/algorithms/vnode-diff",
-    "test:lc": "jest DSA/algorithms/leetcode"
+    "test:lc": "jest DSA/algorithms/leetcode",
+    "fmt": "prettier **/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +21,8 @@
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-preset-env": "^1.7.0",
-    "jest": "^23.1.0"
+    "jest": "^23.1.0",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "rxjs": "^6.2.2"
