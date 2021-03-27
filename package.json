@@ -11,7 +11,9 @@
     "test:dsa": "jest DSA",
     "test:diff": "jest DSA/algorithms/vnode-diff",
     "test:lc": "jest DSA/algorithms/leetcode",
-    "fmt": "prettier **/*.js --write"
+    "fmt": "prettier **/*.js --write",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +23,9 @@
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-preset-env": "^1.7.0",
+    "husky": "^5.2.0",
     "jest": "^23.1.0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
   },
   "dependencies": {
