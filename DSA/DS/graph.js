@@ -24,7 +24,6 @@ export default class Graph {
 		this.vertices[v] = [];
 	}
 	toString() {
-		console.log(this.vertices)
 		return Object.keys(this.vertices).map(key => {
 			return `${key} -> ${this.vertices[key].join(" ")}`
 		}).join("\n")

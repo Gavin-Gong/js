@@ -1,5 +1,5 @@
 import { lis } from "../dp.lis"
-import { inesertBefore, removeChild, nextSibling } from "./_util.js";
+import { inesertBefore, removeChild } from "./_util.js";
 /**
  * @desc inferno & vue3 中采用的最长子序列算法
  * 糅合了前两个算法的一些技巧，再加上最长子序列算法来减少节点的移动操作

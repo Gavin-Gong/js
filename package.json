@@ -9,7 +9,8 @@
     "test:rx": "jest rx",
     "test:es": "jest es",
     "test:dsa": "jest DSA",
-    "test:diff": "jest DSA/algorithms/vnode-diff"
+    "test:diff": "jest DSA/algorithms/vnode-diff",
+    "test:lc": "jest DSA/algorithms/leetcode"
   },
   "author": "",
   "license": "ISC",
