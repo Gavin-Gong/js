@@ -1,13 +1,13 @@
 /**
  * @desc nums = [5,7,7,8,8,10], target = 8 输出：[3,4]
- * TODO: 优化点 -> 第一次搜索出 target 后, 第二次基于 第一次的下标开始查找
  * @link https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 export function searchRange(nums, target) {
-  return [binarySearchLeftTarget(nums, target), binarySearchRightTarget(nums, target)];
+  const start = binarySearchLeftTarget(nums, target);
+  return [start, binarySearchRightTarget(nums, target, start >= 0 ? start : 0)];
 }
 
 /**
@@ -40,8 +40,8 @@ function binarySearchLeftTarget(nums, target) {
  * @param {number[]} nums
  * @param {number} target
  */
-function binarySearchRightTarget(nums, target) {
-  let start = 0;
+function binarySearchRightTarget(nums, target, s = 0) {
+  let start = s;
   let end = nums.length - 1;
   while (start <= end) {
     let mid = start + Math.floor((end - start) / 2);
@@ -59,5 +59,3 @@ function binarySearchRightTarget(nums, target) {
   }
   return -1;
 }
-
-function binarySearchSingleTarget(nums, target, direction, start = 0) {}
