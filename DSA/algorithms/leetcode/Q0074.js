@@ -1,4 +1,7 @@
 /**
+ * @desc Math.floor 可以使用 位操作代替
+ * https://blog.blakesimpson.co.uk/page.php?id=58&title=fastest-alternative-to-math-floor-in-javascript
+ * https://segmentfault.com/q/1010000009863578
  * @link https://leetcode-cn.com/problems/search-a-2d-matrix/
  * @param {number[][]} matrix
  * @param {number} target
