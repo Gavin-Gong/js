@@ -7,7 +7,7 @@
  */
 export function searchRange(nums, target) {
   const start = binarySearchLeftTarget(nums, target);
-  return [start, binarySearchRightTarget(nums, target, start >= 0 ? start : 0)];
+  return [start, start >= 0 ? binarySearchRightTarget(nums, target, start) : -1];
 }
 
 /**
@@ -20,7 +20,6 @@ function binarySearchLeftTarget(nums, target) {
   let end = nums.length - 1;
   while (start <= end) {
     let mid = start + Math.floor((end - start) / 2);
-
     if (nums[mid] === target && nums[mid - 1] !== target) {
       return mid;
     }
@@ -28,8 +27,12 @@ function binarySearchLeftTarget(nums, target) {
       end = mid - 1;
     } else if (nums[mid] < target) {
       start = mid + 1;
-    } else if (nums[mid] === target && nums[mid - 1] === target) {
-      end = mid - 1;
+    } else {
+      if (nums[mid - 1] === target) {
+        end = mid - 1;
+      } else {
+        return mid;
+      }
     }
   }
   return -1;
@@ -45,16 +48,16 @@ function binarySearchRightTarget(nums, target, s = 0) {
   let end = nums.length - 1;
   while (start <= end) {
     let mid = start + Math.floor((end - start) / 2);
-
-    if (nums[mid] === target && nums[mid + 1] !== target) {
-      return mid;
-    }
     if (nums[mid] > target) {
       end = mid - 1;
     } else if (nums[mid] < target) {
       start = mid + 1;
-    } else if (nums[mid] === target && nums[mid + 1] === target) {
-      start = mid + 1;
+    } else {
+      if (nums[mid + 1] === target) {
+        start = mid + 1;
+      } else {
+        return mid;
+      }
     }
   }
   return -1;
