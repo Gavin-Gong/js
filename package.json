@@ -11,6 +11,7 @@
     "test:dsa": "jest DSA",
     "test:diff": "jest DSA/algorithms/vnode-diff",
     "test:lc": "jest DSA/algorithms/leetcode",
+    "test:tpl": "jest DSA/algorithms/template",
     "fmt": "prettier **/*.js --write",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
