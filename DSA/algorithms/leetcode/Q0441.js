@@ -3,12 +3,15 @@
  * @return {number}
  */
 var arrangeCoins = function (n) {
-  let total = 0;
   let line = 0;
-  for (let i = 0; i < n; i++) {
-    total += i + 1;
-    if (total > n) break;
-    line++;
+  let i = 1;
+  let sum = 0;
+  while (i <= n) {
+    if (sum + line + 1 <= n) {
+      line += 1;
+      sum += line;
+      i += line + 1;
+    }
   }
   return line;
 };
