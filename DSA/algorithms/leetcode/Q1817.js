@@ -17,7 +17,7 @@ var findingUsersActiveMinutes = function (logs, k) {
     } else {
       const set = map.get(id);
       set.add(value);
-      map.set(id, set);
+      // map.set(id, set);
     }
   }
 
