@@ -3,11 +3,14 @@
  * @return {number}
  */
 var countAsterisks = function (s) {
-  const list = s.split("|");
+  let valid = true;
   let count = 0;
-  for (let i = 0; i < list.length; i++) {
-    if (i % 2 === 0) {
-      count = count + list[i].split("").filter((v) => v === "*").length;
+  for (let i = 0; i < s.length; i++) {
+    let c = s[i];
+    if (c === "|") {
+      valid = !valid;
+    } else if (c === "*" && valid) {
+      count++;
     }
   }
   return count;
