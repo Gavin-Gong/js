@@ -1,4 +1,4 @@
-/**
+**
  * @param {string[]} sentences
  * @return {number}
  */

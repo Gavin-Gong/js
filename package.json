@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:fp": "jest fp",
-    "test:rx": "jest rx",
-    "test:es": "jest es",
-    "test:dsa": "jest DSA",
-    "test:diff": "jest DSA/algorithms/vnode-diff",
-    "test:lc": "jest DSA/algorithms/leetcode",
-    "test:tpl": "jest DSA/algorithms/template",
+    "test": "vitest",
+    "test:fp": "vitest fp",
+    "test:rx": "vitest rx",
+    "test:es": "vitest es",
+    "test:dsa": "vitest DSA",
+    "test:diff": "vitest DSA/algorithms/vnode-diff",
+    "test:lc": "vitest DSA/algorithms/leetcode",
+    "test:tpl": "vitest DSA/algorithms/template",
     "fmt": "prettier **/*.js --write",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
@@ -20,15 +20,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/plugin-proposal-decorators": "^7.14.5",
-    "@babel/preset-env": "^7.14.7",
-    "babel-jest": "^27.0.6",
     "husky": "^5.2.0",
     "hygen": "^6.2.8",
-    "jest": "^27.0.6",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "vitest": "^0.28.3",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "rxjs": "^6.2.2"
