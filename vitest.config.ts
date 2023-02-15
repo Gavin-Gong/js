@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     include: [
-      "**/*.{test,spec}.{ts,tsx,js,jsx}"
+      "**/*.{ts,tsx,js,jsx}"
     ],
     globals: true
   },
